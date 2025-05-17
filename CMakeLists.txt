@@ -5,6 +5,6 @@ cmake_minimum_required(VERSION 3.10)
 # Set the project name
 project(Code)
 
-add_subdirectory(May/firstWeek/minesweep)
+add_subdirectory(25-5/1/minesweep)
 
-add_subdirectory(May/secondWeek/)
+add_subdirectory(25-5/2/)
