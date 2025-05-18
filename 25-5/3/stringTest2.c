@@ -20,7 +20,8 @@ int main()
     printf("%d\n", countWords(ch, len));
     rmSpace(ch, len);
     printf("%s", ch);
-
+    free(ch);
+    ch=NULL;
     return 0;
 }
 
