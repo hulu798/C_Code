@@ -1,7 +1,7 @@
 /*
-	qsort函数排序
+    qsort函数排序
 */
-//正常传参int(*)(const void*,const void*)类型函数指针
+// 正常传参int(*)(const void*,const void*)类型函数指针
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,5 +15,5 @@ int main()
     qsort(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]), compare);
     for (int i = 0; i < 10; i++)
         printf("%d ", arr[i]);
-    return 0; 
-}  
+    return 0;
+}
