@@ -17,3 +17,7 @@ add_executable(qsort qsort.c)
 add_executable(qsortBubblesort qsortBubblesort.c)
 
 add_executable(callBack callBack.c)
+
+add_executable(stringTest5 stringTest5.c)
+
+add_executable(stringTest6 stringTest6.c)
