@@ -21,3 +21,5 @@ add_executable(callBack callBack.c)
 add_executable(stringTest5 stringTest5.c)
 
 add_executable(stringTest6 stringTest6.c)
+
+add_executable(find find.c)
