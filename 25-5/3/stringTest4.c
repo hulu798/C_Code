@@ -1,21 +1,47 @@
-/* 
-    找到最大公共子串
-*/
+#include <stdio.h>
+#include <string.h>
 
-#include<stdio.h>
-#include<stdlib.h>
+char *findSubstr(char *, char *, char *);
 
 int main()
 {
-    //分配内存,读入字符串
-    char *str1=calloc(128,sizeof(char));
-    char *str2=calloc(128,sizeof(char));
-    fgets(str1,128,stdin);
-    fgets(str2,128,stdin);
-    //找到公共子串
-
-    //释放内存
-    free(str1),free(str2);
-    str1=str2=NULL;
+    char str1[128];
+    char str2[128];
+    scanf("%s %s", str1, str2);
+    char dst[128];
+    findSubstr(str1, str2, dst);
+    printf("%s\n", dst);
     return 0;
+}
+
+char *findSubstr(char *str1, char *str2, char *dst)
+{
+    size_t maxLen = 0;
+    char *maxStr = NULL;
+    for (char *pStr1 = str1; *pStr1; pStr1++)
+    {
+        char *pt1, *pt2;
+        for (char *pStr2 = str2; *pStr2; pStr2++)
+        {
+            size_t len = 0;
+            pt1 = pStr1, pt2 = pStr2;
+            for (pt1 = pStr1, pt2 = pStr2; pt1 && pt2 && *pt1 == *pt2; pt1++, pt2++, len++)
+                ;
+            if (len > maxLen)
+            {
+                maxLen = len;
+                maxStr = pStr1;
+            }
+        }
+    }
+
+    // 返回结果
+    if (maxLen == 0)
+        return NULL;
+    else
+    {
+        strncpy(dst, maxStr, maxLen);
+        dst[maxLen] = '\0';
+        return dst;
+    }
 }
