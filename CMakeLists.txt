@@ -10,3 +10,5 @@ add_subdirectory(25-5/1/)
 add_subdirectory(25-5/2/)
 
 add_subdirectory(25-5/3/)
+
+add_subdirectory(25-7/2/)
