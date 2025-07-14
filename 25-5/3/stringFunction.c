@@ -47,9 +47,9 @@ char *my_strncpy(char* destination,const char*source,size_t n)
 {
     assert(destination && source);
     char *p=destination;
-    while(n-- && (*destination++=*source++));
-    while(n-->0) *destination++='\0';
-    return p;
+    for(n++;--n && (*p++=*source++););
+    while(n--) *p++=0;
+    return destination;
 }
 
 //字符串拼接strncat
