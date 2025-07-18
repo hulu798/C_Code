@@ -5,45 +5,40 @@
 #include<stdio.h>
 #include<assert.h>
 
-//字符串长度strlen
-size_t my_strlen(const char *destination)
+size_t myStrlen(const char *str)
 {
-    assert(destination);
-    const char *begin=destination;
-    while(*destination++);
-    return (size_t)(--destination-begin);
+    assert(str);
+    const char *p=str;
+    while(*p++);
+    return p-str-1;
 }
 
-//字符串拼接strcat
-char* my_strcat(char* destination,const char *source)
+char *myStrcpy(char *destination,const char *source)
 {
-	assert(destination && source);
-    char *p1=destination-1;
-    while(*++p1);
-    while((*p1++=*source++));
+    assert(destination && source);
+    char *p=destination;
+    while((*p++=*source++));
     return destination;
 }
 
-//字符串复制strcpy
-char *my_strcpy(char *destination,const char *source)
+char *myStrcat(char *destination,const char *source)
 {
-	assert(destination && source);
-    char *p1=destination;
-    while((*p1++=*source++));	
-    return destination; 
+    assert(destination && source);
+    char *p=destination-1;
+    while(*++p);
+    while((*p++=*source++));
+    return destination;
 }
 
-//字符串比较strcmp
-int my_strcmp(const char *str1,const char *str2)
+int myStrcmp(const char *str1,const char *str2)
 {
     assert(str1 && str2);
     while(*str1++==*str2++)
         if(!*(str1-1)) return 0;
-    return *str1-*str2;
+    return *--str1-*--str2;
 }
 
-//字符串复制strncpy
-char *my_strncpy(char* destination,const char*source,size_t n)
+char *myStrncpy(char* destination,const char *source,size_t n)
 {
     assert(destination && source);
     char *p=destination;
@@ -52,43 +47,60 @@ char *my_strncpy(char* destination,const char*source,size_t n)
     return destination;
 }
 
-//字符串拼接strncat
-char *my_strncat(char* destination,const char* source,size_t n)
+char *myStrncat(char *destination,const char *source,size_t n)
 {
-    assert(destination && source);
     char *p=destination;
-    while(*destination++);
-    destination--;
-    while(n-- && (*destination++=*source++));
-    *destination='\0';
-    return p;
+    while(*p++);
+    for(n++,p--;--n && (*p++=*source++););
+    return destination;
 }
 
-//字符串比较strncmp
-int my_strncmp(const char *p1,const char *p2,int count)
-{
-    assert(p1 && p2);
-    while(count-- && *p1++==*p2++)
-        if(!*--p1) return 0;
-    return *--p1-*--p2;
-
-}
-
-//字符串查找
-char *my_strstr(const char *str1, const char *str2)
+int myStrncmp(const char *str1,const char *str2,size_t n)
 {
     assert(str1 && str2);
-    const char *str1p = str1, *str2p = str2;
-    const char *ret = str1;
-    while (*ret)
+    for(n++;--n && (*str1++==*str2++);)
+        if(!*(str1-1)) return 0;
+    return *--str1-*--str2;
+}
+
+char *myStrstr(const char *str1,const char *str2)
+{
+    assert(str1 && str2);
+    const char *p1=str1,*p2=str2;
+    while(*str1)
     {
-        str1p=ret;
-        str2p=str2;
-        while (*str1p++ == *str2p++)
-            if(!*str2p) return (char*)ret;
-        ret++;
+        p1=str1;
+        p2=str2;
+        while(*p1++==*p2++)
+            if(!*p2) return (char*)str1;
+        str1++;
     }
     return NULL;
+}
+
+char *myStrtok(char *str,const char *delim)
+{
+    assert(delim);
+    static char *end=NULL;
+    if(str) end=str;
+    else str=end;
+
+    //字符串结尾
+    if(!str || !*str) return NULL;
+
+    for(;*end;end++)
+    {
+        for(const char *p=delim;*p;p++)
+            if(*end==*p)
+            {
+                *end++='\0';
+                return str;
+            }
+    }
+
+    //字符串末尾
+    end=NULL;
+    return str;
 }
 
 
